@@ -3,6 +3,7 @@ import time
 import os
 import subprocess
 import pyperclip
+from config import SEQUENCE_INTERVAL
 
 def press_ctrl_l():
     """Ctrl + L 키 조합을 입력"""
@@ -12,6 +13,26 @@ def press_ctrl_l():
         return True
     except Exception as e:
         print(f"Ctrl + L 입력 중 오류 발생: {e}")
+        return False
+
+def press_ctrl_shift_backspace():
+    """Ctrl + Shift + Backspace 키 조합을 입력"""
+    try:
+        pyautogui.hotkey('ctrl', 'shift', 'backspace')
+        print("Ctrl + Shift + Backspace 키가 입력되었습니다.")
+        return True
+    except Exception as e:
+        print(f"Ctrl + Shift + Backspace 입력 중 오류 발생: {e}")
+        return False
+
+def press_backspace():
+    """Backspace 키를 입력"""
+    try:
+        pyautogui.press('backspace')
+        print("Backspace 키가 입력되었습니다.")
+        return True
+    except Exception as e:
+        print(f"Backspace 입력 중 오류 발생: {e}")
         return False
 
 def repeat_ctrl_l_sequence():
@@ -110,6 +131,16 @@ def repeat_ctrl_l_auto(count=5):
         print("0.6초 대기...")
         time.sleep(0.6)
         
+        # Backspace 두 번 입력
+        print("Backspace 첫 번째 입력 중...")
+        press_backspace()
+        print("Backspace 두 번째 입력 중...")
+        press_backspace()
+        
+        # 0.4초 대기
+        print("0.4초 대기...")
+        time.sleep(0.4)
+        
         # content.txt의 해당 시퀀스 라인만 타이핑
         print("content.txt 라인별 타이핑 시작...")
         content_lines = read_content_file_lines_list("../content.txt")
@@ -129,10 +160,14 @@ def repeat_ctrl_l_auto(count=5):
         else:
             print(f"시퀀스 {i+1}에 해당하는 라인이 없습니다.")
         
-        # 시퀀스 간 10초 대기 (마지막 시퀀스가 아닌 경우)
+        # 시퀀스 간 대기 (마지막 시퀀스가 아닌 경우)
         if i < count - 1:
-            print("10초 대기...")
-            time.sleep(10)
+            print(f"{SEQUENCE_INTERVAL}초 대기...")
+            time.sleep(SEQUENCE_INTERVAL)
+            
+            # Ctrl + Shift + Backspace 입력
+            print("Ctrl + Shift + Backspace 입력 중...")
+            press_ctrl_shift_backspace()
     
     print(f"\n✅ 총 {count}번의 시퀀스가 완료되었습니다!")
 

@@ -106,11 +106,10 @@ def type_content_file(file_path, interval=0.05):
 def main():
     """메인 실행 함수"""
     print("파일 내용 타이핑 프로그램")
-    print("3초 후에 시작합니다. 텍스트 입력이 가능한 창에 포커스를 맞춰주세요.")
-    time.sleep(3)
+    print("바로 시작합니다. 텍스트 입력이 가능한 창에 포커스를 맞춰주세요.")
     
-    # content.txt 파일 경로
-    content_file = "content.txt"
+    # content.txt 파일 경로 (상위 폴더에서 찾기)
+    content_file = "../content.txt"
     
     # 타이핑 실행 (일반 타이핑 방식 사용)
     success = type_content_file(content_file, interval=0.05)

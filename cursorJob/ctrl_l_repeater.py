@@ -1,6 +1,7 @@
 import pyautogui
 import time
 import os
+import subprocess
 
 def press_ctrl_l():
     """Ctrl + L 키 조합을 입력"""
@@ -44,9 +45,24 @@ def repeat_ctrl_l_sequence():
         if not press_ctrl_l():
             break
         
-        # 0.7초 딜레이
-        print("0.7초 대기...")
-        time.sleep(0.7)
+        # 0.6초 딜레이
+        print("0.6초 대기...")
+        time.sleep(0.6)
+        
+        # content_typer.py 실행 (가상환경 활성화)
+        print("content_typer.py 실행 중...")
+        try:
+            # Windows에서 가상환경 활성화 후 실행 (상위 폴더의 venv 사용)
+            subprocess.run(['..\\venv\\Scripts\\python.exe', 'content_typer.py'], check=True)
+            print("content_typer.py 실행 완료")
+        except subprocess.CalledProcessError as e:
+            print(f"content_typer.py 실행 중 오류 발생: {e}")
+        except Exception as e:
+            print(f"content_typer.py 실행 중 예상치 못한 오류: {e}")
+        
+        # 5초 딜레이
+        print("5초 대기...")
+        time.sleep(5)
         
         sequence_count += 1
         
@@ -89,9 +105,24 @@ def repeat_ctrl_l_auto(count=5):
         if not press_ctrl_l():
             break
         
-        # 0.7초 딜레이
-        print("0.7초 대기...")
-        time.sleep(0.7)
+        # 0.6초 딜레이
+        print("0.6초 대기...")
+        time.sleep(0.6)
+        
+        # content_typer.py 실행 (가상환경 활성화)
+        print("content_typer.py 실행 중...")
+        try:
+            # Windows에서 가상환경 활성화 후 실행 (상위 폴더의 venv 사용)
+            subprocess.run(['..\\venv\\Scripts\\python.exe', 'content_typer.py'], check=True)
+            print("content_typer.py 실행 완료")
+        except subprocess.CalledProcessError as e:
+            print(f"content_typer.py 실행 중 오류 발생: {e}")
+        except Exception as e:
+            print(f"content_typer.py 실행 중 예상치 못한 오류: {e}")
+        
+        # 5초 딜레이
+        print("5초 대기...")
+        time.sleep(5)
     
     print(f"\n✅ 총 {count}번의 시퀀스가 완료되었습니다!")
 
